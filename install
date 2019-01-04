@@ -2,13 +2,15 @@
 
 install()
 {
+	command declare base
+
+	base="$(command dirname ${BASH_SOURCE[0]})"
+
 	if command hash "brew" > "/dev/null" 2>&1
 	then
-		command declare base
 		command declare module
 		command declare -a modules
 
-		base="$(command dirname ${BASH_SOURCE[0]})"
 		modules=("${@}")
 
 		if command test -z "${modules}"
@@ -39,15 +41,17 @@ install()
 			fi
 		done
 
-		command unset -v base
 		command unset -v module
 		command unset -v modules
 		command return 0
 	else
 		command echo "Installing Homebrew"
-		/usr/bin/ruby -e "$(command curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" > "/dev/null"
+		/usr/bin/ruby -e "$(command curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < "/dev/null" > "${base}/install.log" 2>&1
 		install "${@}"
 	fi
+
+	command unset -v base
+	command return 0
 }
 
 (install "${@}")

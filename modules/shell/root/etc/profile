@@ -1,0 +1,14 @@
+#!/bin/sh
+
+XDG_CACHE_HOME="${HOME}/.local/cache"
+XDG_CONFIG_HOME="${HOME}/.local/application"
+XDG_DATA_HOME="${HOME}/.local/data"
+
+if command test -r "${XDG_CONFIG_HOME}/shell/setup"
+then
+	command source "${XDG_CONFIG_HOME}/shell/setup"
+fi
+
+command export XDG_CACHE_HOME
+command export XDG_CONFIG_HOME
+command export XDG_DATA_HOME

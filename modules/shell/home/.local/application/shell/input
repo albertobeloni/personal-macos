@@ -1,0 +1,38 @@
+include /etc/inputrc
+
+set bell-style none
+set bind-tty-special-chars off
+set colored-stats on
+set completion-display-width 0
+set completion-ignore-case on
+set completion-prefix-display-length 3
+set completion-query-items -1
+set convert-meta off
+set echo-control-characters off
+set mark-directories off
+set mark-symlinked-directories off
+set match-hidden-files off
+set menu-complete-display-prefix off
+set page-completions on
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+set show-mode-in-prompt on
+
+set visible-stats off
+
+set editing-mode vi
+set vi-cmd-mode-string \1\e[31m\2
+set vi-ins-mode-string \1\e[39m\2
+
+Tab: menu-complete
+"\e[Z": menu-complete-backward
+set keymap vi-command
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+set keymap vi-insert
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
+"\e[A": history-search-backward
+"\e[B": history-search-forward

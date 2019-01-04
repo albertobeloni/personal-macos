@@ -1,0 +1,9 @@
+[submodule "modules/neovim/home/.local/data/nvim/site/pack/custom/start/vim-vinegar"]
+	path = modules/neovim/home/.local/data/nvim/site/pack/custom/start/vim-vinegar
+	url = https://github.com/tpope/vim-vinegar
+[submodule "modules/neovim/home/.local/data/nvim/site/pack/custom/start/vim-surround"]
+	path = modules/neovim/home/.local/data/nvim/site/pack/custom/start/vim-surround
+	url = https://github.com/tpope/vim-surround
+[submodule "modules/neovim/home/.local/data/nvim/site/pack/custom/start/vim-commentary"]
+	path = modules/neovim/home/.local/data/nvim/site/pack/custom/start/vim-commentary
+	url = https://github.com/tpope/vim-commentary

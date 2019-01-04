@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if command test -z "${PS1}"
+then
+	command return
+fi
+
+if command test -r "${XDG_CONFIG_HOME}/bash/setup"
+then
+	command source "${XDG_CONFIG_HOME}/bash/setup"
+fi

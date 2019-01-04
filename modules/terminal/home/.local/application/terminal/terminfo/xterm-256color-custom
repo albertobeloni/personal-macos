@@ -1,0 +1,4 @@
+xterm-256color-custom|Custom xterm with 256 colors,
+	sitm=\E[3m,
+	ritm=\E[23m,
+	use=xterm-256color,

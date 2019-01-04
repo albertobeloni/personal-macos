@@ -1,0 +1,9 @@
+#!/bin/sh
+
+command tput reset
+
+TERMINAL_BACKGROUND="${1}"
+
+command export TERMINAL_BACKGROUND
+
+command login -fpq "${USER}" "${SHELL}"

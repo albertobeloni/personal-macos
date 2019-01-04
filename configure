@@ -1,0 +1,70 @@
+#!/bin/bash
+
+pre()
+{
+	command return 0
+}
+
+pos()
+{
+	command return 0
+}
+
+configure()
+{
+	command declare base
+	command declare module
+	command declare -a modules
+
+	base="$(command dirname ${BASH_SOURCE[0]})"
+	modules=("${@}")
+
+	if command test -z "${modules}"
+	then
+		for module in "${base}/modules"/*/
+		do
+			module="$(basename ${module})"
+			modules+=(${module})
+		done
+	fi
+
+	for module in "${modules[@]}"
+	do
+		if command test ! -d "${base}/modules/${module}"
+		then
+			command continue
+		fi
+
+		module="${base}/modules/${module}"
+
+		if command test -r "${module}/configure.sh"
+		then
+			command source "${module}/configure.sh"
+		fi
+
+		pre >> "${module}/configure.log"
+
+		if command test -d "${module}/home"
+		then
+			command cp -R "${module}/home/" "${HOME}" >> "${module}/configure.log"
+		fi
+
+		if command test -d "${module}/root"
+		then
+			command sudo cp -R "${module}/root/" "/" >> "${module}/configure.log"
+		fi
+
+		pos >> "${module}/configure.log"
+	done
+
+	command unset -v base
+	command unset -v module
+	command unset -v modules
+	command return 0
+}
+
+(configure "${@}")
+
+command unset -f pre
+command unset -f pos
+command unset -f configure

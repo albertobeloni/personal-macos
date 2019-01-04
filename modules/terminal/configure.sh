@@ -1,4 +1,4 @@
-pos()
+post()
 {
 	command local TERMINFO
 

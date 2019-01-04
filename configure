@@ -5,7 +5,7 @@ pre()
 	command return 0
 }
 
-pos()
+post()
 {
 	command return 0
 }
@@ -35,26 +35,33 @@ configure()
 			command continue
 		fi
 
+		command echo "Module: ${module}"
+
 		module="${base}/modules/${module}"
 
 		if command test -r "${module}/configure.sh"
 		then
+			command echo "	Sourcing module configuration script"
 			command source "${module}/configure.sh"
 		fi
 
+		command echo "	Running pre-configuration hooks"
 		pre >> "${module}/configure.log"
 
 		if command test -d "${module}/home"
 		then
+			command echo "	Copying user files"
 			command cp -R "${module}/home/" "${HOME}" >> "${module}/configure.log"
 		fi
 
 		if command test -d "${module}/root"
 		then
+			command echo "	Copying system files"
 			command sudo cp -R "${module}/root/" "/" >> "${module}/configure.log"
 		fi
 
-		pos >> "${module}/configure.log"
+		command echo "	Running post-configuration hooks"
+		post >> "${module}/configure.log"
 	done
 
 	command unset -v base
@@ -66,5 +73,5 @@ configure()
 (configure "${@}")
 
 command unset -f pre
-command unset -f pos
+command unset -f post
 command unset -f configure

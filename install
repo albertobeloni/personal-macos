@@ -2,7 +2,7 @@
 
 install()
 {
-	if command hash "brew" > "/dev/null"
+	if command hash "brew" > "/dev/null" 2>&1
 	then
 		command declare base
 		command declare module

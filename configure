@@ -1,15 +1,5 @@
 #!/bin/bash
 
-pre()
-{
-	command return 0
-}
-
-post()
-{
-	command return 0
-}
-
 configure()
 {
 	command declare base
@@ -32,6 +22,7 @@ configure()
 	do
 		if command test ! -d "${base}/modules/${module}"
 		then
+			command echo "Module ${module} not found"
 			command continue
 		fi
 
@@ -39,14 +30,20 @@ configure()
 
 		module="${base}/modules/${module}"
 
+		command unset -f pre
+		command unset -f post
+
 		if command test -r "${module}/configure.sh"
 		then
 			command echo "	Sourcing module configuration script"
 			command source "${module}/configure.sh"
 		fi
 
-		command echo "	Running pre-configuration hooks"
-		pre >> "${module}/configure.log"
+		if command hash "pre" > "/dev/null" 2>&1
+		then
+			command echo "	Running pre-configuration hooks"
+			pre >> "${module}/configure.log"
+		fi
 
 		if command test -d "${module}/home"
 		then
@@ -60,8 +57,11 @@ configure()
 			command sudo cp -R "${module}/root/" "/" >> "${module}/configure.log"
 		fi
 
-		command echo "	Running post-configuration hooks"
-		post >> "${module}/configure.log"
+		if command hash "post" > "/dev/null" 2>&1
+		then
+			command echo "	Running post-configuration hooks"
+			post >> "${module}/configure.log"
+		fi
 	done
 
 	command unset -v base

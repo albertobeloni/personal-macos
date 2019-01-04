@@ -24,13 +24,17 @@ install()
 		do
 			if command test ! -d "${base}/modules/${module}"
 			then
+				command echo "Module ${module} not found"
 				command continue
 			fi
+
+			command echo "Module: ${module}"
 
 			module="${base}/modules/${module}"
 
 			if command test -r "${module}/install.sh"
 			then
+				command echo "	Running module installation script"
 				command source "${module}/install.sh" >> "${module}/install.log"
 			fi
 		done
@@ -40,6 +44,7 @@ install()
 		command unset -v modules
 		command return 0
 	else
+		command echo "Installing Homebrew"
 		/usr/bin/ruby -e "$(command curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" > "/dev/null"
 		install "${@}"
 	fi

@@ -183,7 +183,7 @@
 	<key>ProfileCurrentVersion</key>
 	<real>2.0600000000000001</real>
 	<key>RunCommandAsShell</key>
-	<false/>
+	<true/>
 	<key>ShowActiveProcessInTabTitle</key>
 	<false/>
 	<key>ShowActiveProcessInTitle</key>

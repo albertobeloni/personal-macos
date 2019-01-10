@@ -3,7 +3,7 @@ post()
 	command local driver
 	command local machine
 
-	driver="xhyve --xhyve-experimental-nfs-share --xhyve-boot2docker-url https://github.com/boot2docker/boot2docker/releases/download/v18.06.1-ce/boot2docker.iso"
+	driver="xhyve --xhyve-experimental-nfs-share"
 	machine="default"
 
 	MACHINE_STORAGE_PATH="${HOME}/.local/data/docker/machine"
